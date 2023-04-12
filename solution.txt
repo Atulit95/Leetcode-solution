@@ -118,42 +118,28 @@ vec = ans;
 
 //Valid Parenthesis
 
-void validparenthesis (string input)
-{
- stack <char> s;
- int length = input.length();
- char top;
- for(int i = 0; i< length; i++){
-   if(input[i] == '(' || input[i] == '{' || input[i] == '['){
-     s.push(input[i]);
-   }
-   else
-   {
-     if(s.empty()){
-       cout<<"Invalid parentheses"<<endl;
-       return;
-     }
-      else{
-      top = s.top();
-      if(input[i] == ')' && top == '(' || 
-        input[i] == '}' && top == '{' ||
-        input[i] == ']' && top == '[') {
-        s.pop();
-      }
-      else{
-        cout<<"Invalid parentheses"<<endl;
-        return;
-      }
-     }
-   }
- }
- if (s.empty()){
-   cout<<"Valid parentheses"<<endl;
- }
- else{
-   cout<<Invalid parentheses"<<endl;
- }
-}
+bool isValid(char * s){
+    int len = strlen(s);
+    char stack[len]; 
+    int top = -1; 
+    for (int i = 0; i < len; i++) {
+        if (s[i] == '(' || s[i] == '[' || s[i] == '{') { 
+            top++; 
+            stack[top] = s[i];
+        }
+        else {
+            if (top == -1) { 
+                return false;
+            }
+            if ((s[i] == ')' && stack[top] == '(') || (s[i] == ']' && stack[top] == '[') ||(s[i] == '}' && stack[top] == '{')) {
+                top--; 
+            }
+            else { 
+                return false;
+            }
+        }
+    }
+    return (top == -1); 
 Footer
 © 2023 GitHub, Inc.
 Footer navigation
